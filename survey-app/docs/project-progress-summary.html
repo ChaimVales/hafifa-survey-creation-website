@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>סיכום התקדמות הפרויקט - שרת סקרים</title>
+<style>
+  :root {
+    --bg:#fafafa; --paper:#ffffff; --ink:#1a2332; --muted:#5c6b7a;
+    --brand:#0d47a1; --accent:#1565c0; --warn:#e65100; --ok:#2e7d32; --danger:#c62828;
+    --border:#e0e6ed; --code-bg:#1a1f2e; --code-ink:#e8e8e8; --highlight:#fff59d;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:0; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI","Heebo","Arial Hebrew",Arial,sans-serif; line-height:1.85; font-size:15px; }
+  .wrap { max-width:1050px; margin:0 auto; padding:30px 25px 80px; }
+  header.hero { background:linear-gradient(135deg,#0d47a1 0%,#1565c0 100%); color:#fff;
+    padding:45px 40px; border-radius:14px; margin-bottom:30px; }
+  header.hero h1 { margin:0 0 8px; font-size:32px; }
+  header.hero .meta { margin-top:12px; font-size:14px; opacity:0.9; }
+  .progress-bar { background:rgba(255,255,255,0.2); border-radius:999px; height:10px;
+    overflow:hidden; margin-top:20px; }
+  .progress-fill { background:#00bfa5; height:100%; width:35%; }
+  .step { background:var(--paper); border:1px solid var(--border); border-radius:12px;
+    padding:25px 30px; margin-bottom:22px; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+  .step h2 { color:var(--brand); margin-top:0; font-size:24px;
+    padding-bottom:10px; border-bottom:3px solid var(--accent);
+    display:flex; align-items:center; gap:12px; }
+  .step-num { background:var(--brand); color:white; width:38px; height:38px;
+    line-height:38px; border-radius:50%; text-align:center; font-weight:800; flex-shrink:0; }
+  .step h3 { color:var(--ink); font-size:18px; margin-top:22px;
+    padding-right:12px; border-right:5px solid var(--accent); }
+  p { margin:0 0 12px; }
+  pre { background:var(--code-bg); color:var(--code-ink); padding:14px 18px; border-radius:8px;
+    overflow-x:auto; direction:ltr; text-align:left; font-family:"Fira Code",Consolas,monospace;
+    font-size:13.5px; line-height:1.6; }
+  code.inline { background:#eef2f7; color:#1a2332; padding:2px 7px; border-radius:5px;
+    font-family:Consolas,monospace; font-size:0.9em; direction:ltr; display:inline-block; }
+  .why { background:#e8f5e9; border-inline-start:4px solid var(--ok);
+    padding:12px 16px; border-radius:6px; margin:12px 0; font-size:14px; }
+  .why strong { color:var(--ok); }
+  .files-table { width:100%; border-collapse:collapse; margin:12px 0; font-size:14px; }
+  .files-table th, .files-table td { border:1px solid var(--border); padding:8px 12px; text-align:right; }
+  .files-table th { background:#e3f2fd; color:var(--brand); }
+  .icon-file { color:var(--brand); font-weight:700; }
+  .tag { display:inline-block; background:var(--brand); color:white;
+    padding:2px 10px; border-radius:999px; font-size:12px; font-weight:700; }
+  .tag-cmd { background:#5e35b1; }
+  .tag-file { background:#00897b; }
+  .tag-concept { background:#ef6c00; }
+  .timeline-time { display:inline-block; background:#eef3ff; color:var(--brand);
+    padding:2px 12px; border-radius:999px; font-size:13px; font-weight:600; }
+  .next-step { background:#fff8e1; border:2px dashed var(--warn);
+    padding:20px 25px; border-radius:12px; margin-top:30px; }
+  .next-step h2 { color:var(--warn); margin-top:0; }
+  .print-btn { position:fixed; top:15px; left:15px; background:var(--brand); color:white;
+    border:none; padding:10px 18px; border-radius:999px; font-weight:700; font-size:14px;
+    cursor:pointer; box-shadow:0 4px 12px rgba(13,71,161,0.4); z-index:100; }
+  .key { background:linear-gradient(90deg,#fff59d 0%,transparent 100%);
+    padding:2px 7px; font-weight:700; }
+  .step .summary-line { background:#f5f7fa; padding:8px 14px; border-radius:6px; font-size:14px; }
+  details { background:#f5f7fa; padding:12px 16px; border-radius:6px; margin:10px 0; }
+  details summary { cursor:pointer; font-weight:600; color:var(--brand); }
+  details[open] summary { margin-bottom:8px; }
+  @media print {
+    .print-btn { display:none; }
+    body { background:white; font-size:12px; }
+    .wrap { max-width:100%; padding:0; }
+    .step { page-break-inside:avoid; box-shadow:none; }
+  }
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">🖨️ הדפס / שמור כ-PDF</button>
+<div class="wrap">
+
+<header class="hero">
+  <h1>📋 סיכום התקדמות הפרויקט</h1>
+  <p class="meta">פרויקט: אתר ליצירת סקרים | חיים ולס | מתחיל: אפריל 2026</p>
+  <div>
+    <strong>סטטוס נוכחי:</strong> פרויקט מלא ב-Docker! Backend + Client + nginx + Atlas + טסטים. נשאר README + מסמכים.
+  </div>
+  <div class="progress-bar"><div class="progress-fill" style="width:99%"></div></div>
+  <div class="meta">התקדמות מוערכת: ~99% מהפרויקט המלא</div>
+</header>
+
+<!-- ============ STEP 1 ============ -->
+<div class="step">
+  <h2><span class="step-num">1</span>בדיקת תשתית קיימת</h2>
+  <p class="summary-line">📌 וידאנו ש-Node, Git, Docker, VS Code מותקנים ועובדים.</p>
+
+  <h3>🔧 כלים שכבר היו מותקנים</h3>
+  <table class="files-table">
+    <tr><th>כלי</th><th>למה צריך</th></tr>
+    <tr><td><strong>Node.js</strong></td><td>הרצת JavaScript בצד שרת</td></tr>
+    <tr><td><strong>npm</strong></td><td>ניהול ספריות (מגיע עם Node)</td></tr>
+    <tr><td><strong>Git</strong></td><td>ניהול גרסאות + שיתוף ב-GitHub</td></tr>
+    <tr><td><strong>Docker Desktop</strong></td><td>הרצת containers (סביבה מבודדת)</td></tr>
+    <tr><td><strong>VS Code</strong></td><td>עורך הקוד</td></tr>
+  </table>
+
+  <h3>⌨️ פקודות לבדיקה</h3>
+  <pre>node --version       # מציג גרסה של Node
+git --version        # מציג גרסה של Git
+docker --version     # מציג גרסה של Docker
+docker run hello-world   # בדיקה ש-Docker באמת רץ ויודע ליצור containers</pre>
+
+  <div class="why"><strong>למה זה חשוב?</strong> לפני שמתחילים, צריך לוודא שכל הכלים פועלים. אחרת תמצא את עצמך מנסה להריץ קוד ונכשל בגלל בעיה בסביבה ולא בקוד.</div>
+</div>
+
+<!-- ============ STEP 2 ============ -->
+<div class="step">
+  <h2><span class="step-num">2</span>הקמת מבנה התיקיות</h2>
+  <p class="summary-line">📌 יצרנו תיקייה ראשית עם תת-תיקיות לכל חלק במערכת.</p>
+
+  <h3>📁 מבנה התיקיות</h3>
+  <pre>survey-app/
+├── client/      → קוד הקליינט (React) - ריק עדיין
+├── server/      → קוד השרת (Node + Express + TS)
+├── nginx/       → קונפיג ל-reverse proxy
+├── docs/        → תיעוד ותרשימים</pre>
+
+  <h3>⌨️ פקודות PowerShell</h3>
+  <pre>cd $HOME\Desktop                       # ל-Desktop
+mkdir survey-app                       # יצירת תיקייה
+cd survey-app                          # כניסה
+mkdir client server nginx docs         # יצירת תת-תיקיות</pre>
+
+  <div class="why"><strong>למה החלוקה הזו?</strong> בפרויקט fullstack מפרידים בין השרת לבין הלקוח. ככה כל אחד יכול להיבנות בנפרד, לרוץ בנפרד, ולהיות מתוחזק על ידי אנשים שונים. זה הסטנדרט המקצועי.</div>
+</div>
+
+<!-- ============ STEP 3 ============ -->
+<div class="step">
+  <h2><span class="step-num">3</span>אתחול פרויקט Node ב-server</h2>
+  <p class="summary-line">📌 יצרנו <code class="inline">package.json</code> ראשון לשרת.</p>
+
+  <h3>⌨️ פקודות</h3>
+  <pre>cd server         # נכנסים לתיקיית השרת
+npm init -y       # יוצר package.json עם ערכי ברירת מחדל</pre>
+
+  <h3>📄 הקובץ שנוצר: <code class="inline">package.json</code></h3>
+  <pre>{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  ...
+}</pre>
+
+  <div class="why"><strong>מה זה <code class="inline">package.json</code>?</strong> "תעודת הזהות" של פרויקט Node. רושם את שם הפרויקט, גרסה, ספריות שתלויים בהן, ופקודות מהירות (scripts).</div>
+
+  <details>
+    <summary>🤔 ההבדל בין <code class="inline">npm init</code> ל-<code class="inline">npm install</code></summary>
+    <p><strong>npm init</strong> = יוצר package.json חדש (פעם אחת בתחילת פרויקט)</p>
+    <p><strong>npm install</strong> = מוריד ספרייה ומוסיף לרשימת התלויות (כל פעם שצריך תלות)</p>
+  </details>
+</div>
+
+<!-- ============ STEP 4 ============ -->
+<div class="step">
+  <h2><span class="step-num">4</span>התקנת Express (תלות עיקרית)</h2>
+  <p class="summary-line">📌 התקנו את ספריית Express - הספרייה הראשית של השרת.</p>
+
+  <h3>⌨️ פקודה</h3>
+  <pre>npm i express</pre>
+
+  <h3>📦 מה נוצר אחרי הפקודה</h3>
+  <table class="files-table">
+    <tr><th>פריט</th><th>מה זה</th></tr>
+    <tr><td><strong>node_modules/</strong></td><td>תיקייה ענקית עם הקוד של 65+ ספריות (express + תלויות שלו)</td></tr>
+    <tr><td><strong>package-lock.json</strong></td><td>"צילום" של הגרסאות המדויקות שהותקנו - מבטיח reproducibility</td></tr>
+    <tr><td><strong>package.json</strong> (עודכן)</td><td>נוסף שדה <code class="inline">"dependencies": { "express": "^5.2.1" }</code></td></tr>
+  </table>
+
+  <div class="why"><strong>על ה-<code class="inline">^</code> (caret) בגרסה:</strong> <code class="inline">^5.2.1</code> מאפשר עדכון אוטומטי בתוך אותה גרסה ראשית (5.x.x) אבל לא ל-6.0.0 שעלולה לשבור תאימות. זה נקרא <strong>Semantic Versioning</strong>.</div>
+</div>
+
+<!-- ============ STEP 5 ============ -->
+<div class="step">
+  <h2><span class="step-num">5</span>התקנת TypeScript וכלי פיתוח</h2>
+  <p class="summary-line">📌 התקנו את typescript, tsx, @types/express, @types/node כתלויות פיתוח.</p>
+
+  <h3>⌨️ פקודה (עם הדגל <code class="inline">-D</code> שחיוני!)</h3>
+  <pre>npm install -D typescript tsx @types/express @types/node</pre>
+
+  <h3>🎯 מה כל כלי עושה</h3>
+  <table class="files-table">
+    <tr><th>כלי</th><th>תפקיד</th></tr>
+    <tr><td><strong>typescript</strong></td><td>הקומפיילר - מתרגם TS ל-JS</td></tr>
+    <tr><td><strong>tsx</strong></td><td>מריץ קבצי TS ישירות (בלי קימפול קודם)</td></tr>
+    <tr><td><strong>@types/express</strong></td><td>הצהרות טיפוסים של express - כי express עצמו ב-JS</td></tr>
+    <tr><td><strong>@types/node</strong></td><td>הצהרות טיפוסים של Node (process, console...)</td></tr>
+  </table>
+
+  <div class="why"><strong>למה <code class="inline">-D</code>?</strong> אלה <strong>devDependencies</strong> - תלויות פיתוח. ב-production לא נצטרך אותם (מריצים את ה-JS המקומפל). ה-image של Docker יוצא קטן יותר.</div>
+
+  <details>
+    <summary>📚 טעות שלמדנו ממנה</summary>
+    <p>בהתחלה כתבנו <code class="inline">npm i typescript tsx @types/express @types/node</code> בלי <code class="inline">-D</code> - והם נכנסו ל-<code class="inline">dependencies</code> במקום <code class="inline">devDependencies</code>. תיקנו עם <code class="inline">npm install -D ...</code> שוב, ו-npm העביר אותם אוטומטית. <strong>הלקח:</strong> שים לב לאותיות גדולות/קטנות בדגלים של npm. <code class="inline">-d</code> הוא debug, <code class="inline">-D</code> הוא save-dev.</p>
+  </details>
+</div>
+
+<!-- ============ STEP 6 ============ -->
+<div class="step">
+  <h2><span class="step-num">6</span>הגדרת TypeScript - tsconfig.json</h2>
+  <p class="summary-line">📌 יצרנו קובץ קונפיגורציה של TS עם הגדרות נכונות לשרת Node.</p>
+
+  <h3>⌨️ פקודה (יוצרת קובץ אוטומטית)</h3>
+  <pre>npx tsc --init</pre>
+
+  <h3>📄 הקובץ הסופי שלנו: <code class="inline">tsconfig.json</code></h3>
+  <pre>{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}</pre>
+
+  <h3>🔍 מה כל שדה אומר</h3>
+  <table class="files-table">
+    <tr><th>שדה</th><th>משמעות</th></tr>
+    <tr><td><code class="inline">target: "ES2022"</code></td><td>קמפל לגרסת JavaScript של 2022</td></tr>
+    <tr><td><code class="inline">module: "commonjs"</code></td><td>סגנון require/module.exports - הסטנדרט של Node</td></tr>
+    <tr><td><code class="inline">rootDir: "./src"</code></td><td>הקוד שלי נמצא ב-src/</td></tr>
+    <tr><td><code class="inline">outDir: "./dist"</code></td><td>שים את הקוד המקומפל ב-dist/</td></tr>
+    <tr><td><code class="inline">esModuleInterop: true</code></td><td>מאפשר <code class="inline">import express from 'express'</code></td></tr>
+    <tr><td><code class="inline">strict: true</code></td><td>קפדנות בטיפוסים - תופס באגים מוקדם</td></tr>
+    <tr><td><code class="inline">skipLibCheck: true</code></td><td>אל תבדוק שגיאות בספריות חיצוניות</td></tr>
+    <tr><td><code class="inline">forceConsistentCasingInFileNames: true</code></td><td>קפדנות באותיות גדולות/קטנות</td></tr>
+  </table>
+
+  <div class="why"><strong>למה צריך את הקובץ?</strong> בלעדיו, TypeScript לא יודע איך לקמפל - לאיזו גרסת JS, מאיפה לקרוא קוד, לאן לשמור. זו "תעודת הזהות" של TS בפרויקט.</div>
+</div>
+
+<!-- ============ STEP 7 ============ -->
+<div class="step">
+  <h2><span class="step-num">7</span>כתיבת השרת הראשון</h2>
+  <p class="summary-line">📌 כתבנו ב-<code class="inline">src/index.ts</code> שרת Express מינימלי עם 2 endpoints.</p>
+
+  <h3>📄 הקוד: <code class="inline">server/src/index.ts</code></h3>
+  <pre>import express from 'express'
+
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+    res.send('Hello from Server!')
+})
+
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'OK' })
+})
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})</pre>
+
+  <h3>🔍 הסבר שורה-שורה</h3>
+  <table class="files-table">
+    <tr><th>קוד</th><th>מה הוא עושה</th></tr>
+    <tr><td><code class="inline">import express from 'express'</code></td><td>מייבא את הספרייה (סגנון מודרני - אפשרי בזכות esModuleInterop)</td></tr>
+    <tr><td><code class="inline">const app = express()</code></td><td>יוצר אפליקציית Express חדשה</td></tr>
+    <tr><td><code class="inline">app.get('/', ...)</code></td><td>מגדיר נקודת קצה: בקשה GET ל-"/" → מחזיר "Hello from Server!"</td></tr>
+    <tr><td><code class="inline">app.get('/api/health', ...)</code></td><td>נקודת בריאות (Health Check) - כל אתר מקצועי יש לו אחת</td></tr>
+    <tr><td><code class="inline">res.send('...')</code></td><td>מחזיר טקסט פשוט</td></tr>
+    <tr><td><code class="inline">res.json({...})</code></td><td>מחזיר JSON (עם Content-Type נכון)</td></tr>
+    <tr><td><code class="inline">app.listen(port, ...)</code></td><td>מתחיל להאזין על הפורט</td></tr>
+  </table>
+
+  <div class="why"><strong>למה <code class="inline">import</code> ולא <code class="inline">require</code>?</strong> סגנון <code class="inline">import</code> הוא הסטנדרט של ES Modules (חדש). <code class="inline">require</code> הוא של CommonJS (ישן). ב-TypeScript מועדף <code class="inline">import</code> - יותר נקי וקיבל טיפוסים מלאים.</div>
+</div>
+
+<!-- ============ STEP 8 ============ -->
+<div class="step">
+  <h2><span class="step-num">8</span>הגדרת npm scripts</h2>
+  <p class="summary-line">📌 הוספנו "קיצורי דרך" ב-<code class="inline">package.json</code>: dev, build, start.</p>
+
+  <h3>📄 שדה <code class="inline">scripts</code> ב-package.json</h3>
+  <pre>"scripts": {
+  "dev": "tsx watch src/index.ts",
+  "build": "tsc",
+  "start": "node dist/index.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+}</pre>
+
+  <h3>🎯 איזה script מתי</h3>
+  <table class="files-table">
+    <tr><th>פקודה</th><th>תרגום</th><th>מתי משתמשים</th></tr>
+    <tr><td><code class="inline">npm run dev</code></td><td>tsx watch src/index.ts</td><td>פיתוח - מריץ את ה-TS עם hot reload</td></tr>
+    <tr><td><code class="inline">npm run build</code></td><td>tsc</td><td>קמפול ל-JS לקראת production</td></tr>
+    <tr><td><code class="inline">npm start</code></td><td>node dist/index.js</td><td>הפעלת הקוד המקומפל (production)</td></tr>
+  </table>
+
+  <div class="why"><strong>על <code class="inline">tsx watch</code>:</strong> ה-watch גורם ל-tsx להפעיל מחדש את השרת אוטומטית כשמשנים קוד. <strong>הערה חשובה:</strong> זה רק על השרת - הדפדפן צריך רענון ידני. ב-Vite/React יש HMR שמעדכן גם את הדפדפן אוטומטית.</div>
+</div>
+
+<!-- ============ STEP 9 ============ -->
+<div class="step">
+  <h2><span class="step-num">9</span>הרצת השרת מקומית - בודקים שעובד</h2>
+  <p class="summary-line">📌 הרצנו את השרת ובדקנו ש-localhost:3000 ו-localhost:3000/api/health מגיבים.</p>
+
+  <h3>⌨️ פקודה</h3>
+  <pre>npm run dev</pre>
+
+  <h3>📋 פלט מצופה ב-PowerShell</h3>
+  <pre>> server@1.0.0 dev
+> tsx watch src/index.ts
+Example app listening on port 3000</pre>
+
+  <h3>🌐 בדיקה בדפדפן</h3>
+  <table class="files-table">
+    <tr><th>URL</th><th>מצופה</th></tr>
+    <tr><td><code class="inline">http://localhost:3000/</code></td><td>טקסט: "Hello from Server!"</td></tr>
+    <tr><td><code class="inline">http://localhost:3000/api/health</code></td><td>JSON: <code class="inline">{"status":"OK"}</code></td></tr>
+  </table>
+
+  <h3>🛑 איך עוצרים?</h3>
+  <p>ב-PowerShell - לחץ <strong>Ctrl+C</strong>.</p>
+</div>
+
+<!-- ============ STEP 10 ============ -->
+<div class="step">
+  <h2><span class="step-num">10</span>Docker - בניית Image</h2>
+  <p class="summary-line">📌 השתמשנו ב-Dockerfile קיים, יצרנו .dockerignore, ובנינו image.</p>
+
+  <h3>📄 הקובץ: <code class="inline">server/Dockerfile</code></h3>
+  <pre>FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["node", "dist/index.js"]</pre>
+
+  <h3>🔍 הסבר שורה-שורה</h3>
+  <table class="files-table">
+    <tr><th>שורה</th><th>מה היא עושה</th></tr>
+    <tr><td><code class="inline">FROM node:20-alpine</code></td><td>תתחיל מ-Linux מינימליסטי עם Node 20 מותקן</td></tr>
+    <tr><td><code class="inline">WORKDIR /app</code></td><td>תיצור תיקייה /app ושים אותה כתיקייה הנוכחית</td></tr>
+    <tr><td><code class="inline">COPY package*.json ./</code></td><td>תעתיק רק את package.json (ראשון! לקאש)</td></tr>
+    <tr><td><code class="inline">RUN npm ci</code></td><td>תתקין את כל התלויות</td></tr>
+    <tr><td><code class="inline">COPY . .</code></td><td>תעתיק את שאר הקוד</td></tr>
+    <tr><td><code class="inline">RUN npm run build</code></td><td>קמפל TypeScript ל-JS (יוצר dist/)</td></tr>
+    <tr><td><code class="inline">EXPOSE 3000</code></td><td>הצהרה: השרת ירוץ על פורט 3000 (תיעוד)</td></tr>
+    <tr><td><code class="inline">CMD ["node", "dist/index.js"]</code></td><td>פקודת ההפעלה כשה-container עולה</td></tr>
+  </table>
+
+  <h3>📄 הקובץ: <code class="inline">server/.dockerignore</code></h3>
+  <pre>node_modules
+dist
+.env
+.git
+*.log</pre>
+
+  <div class="why"><strong>למה .dockerignore?</strong> בלעדיו, ה-COPY מעתיק גם את node_modules המקומי (40MB+) בזבז זמן ומקום. עם ההתעלמות הזו, ה-build הראשון מהיר יותר.</div>
+
+  <h3>⌨️ פקודת בנייה</h3>
+  <pre>docker build -t survey-server .</pre>
+
+  <table class="files-table">
+    <tr><th>חלק</th><th>משמעות</th></tr>
+    <tr><td><code class="inline">docker build</code></td><td>בנה image</td></tr>
+    <tr><td><code class="inline">-t survey-server</code></td><td>תן לו תווית/שם "survey-server"</td></tr>
+    <tr><td><code class="inline">.</code></td><td>ה-context (תיקיית הקבצים) הוא התיקייה הנוכחית</td></tr>
+  </table>
+</div>
+
+<!-- ============ STEP 11 ============ -->
+<div class="step">
+  <h2><span class="step-num">11</span>Docker - הרצת Container</h2>
+  <p class="summary-line">📌 הפעלנו container מה-image, וגלשנו ל-localhost:3000 - השרת עונה!</p>
+
+  <h3>⌨️ פקודה</h3>
+  <pre>docker run -p 3000:3000 survey-server</pre>
+
+  <table class="files-table">
+    <tr><th>חלק</th><th>משמעות</th></tr>
+    <tr><td><code class="inline">docker run</code></td><td>צור container חדש והפעל אותו</td></tr>
+    <tr><td><code class="inline">-p 3000:3000</code></td><td>קשר את port 3000 של המחשב ל-port 3000 של ה-container</td></tr>
+    <tr><td><code class="inline">survey-server</code></td><td>שם ה-image שממנו ליצור</td></tr>
+  </table>
+
+  <div class="why"><strong>על מיפוי פורטים:</strong> הפורמט הוא <strong>HOST:CONTAINER</strong>. <code class="inline">-p 8080:3000</code> = "תיכנס ל-localhost:8080 - אעביר ל-port 3000 של ה-container". זה מאפשר להריץ כמה containers על פורטים שונים בלי התנגשות.</div>
+
+  <h3>🛑 איך עוצרים את ה-container?</h3>
+  <p>ב-PowerShell - לחץ <strong>Ctrl+C</strong>. או דרך Docker Desktop → Containers → ריבוע (Stop).</p>
+</div>
+
+<!-- ============ STEP 12 ============ -->
+<div class="step">
+  <h2><span class="step-num">12</span>התקנת mongoose וחיבור ל-MongoDB</h2>
+  <p class="summary-line">📌 התקנו את mongoose, ועדכנו את index.ts לחיבור ל-MongoDB עם משתני סביבה.</p>
+
+  <h3>⌨️ פקודה</h3>
+  <pre>cd server
+npm install mongoose</pre>
+
+  <h3>📄 העדכון העיקרי ב-<code class="inline">src/index.ts</code></h3>
+  <pre>import mongoose from 'mongoose'
+
+const port = process.env.PORT || 3000
+const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/surveys'
+
+async function start() {
+    try {
+        await mongoose.connect(mongoUri)
+        console.log('Connected to MongoDB')
+        app.listen(port, () =&gt; console.log(`Listening on ${port}`))
+    } catch (err) {
+        console.error('MongoDB connection failed:', err)
+        process.exit(1)
+    }
+}
+start()</pre>
+
+  <h3>🔍 הסבר השינויים העיקריים</h3>
+  <table class="files-table">
+    <tr><th>שורה</th><th>משמעות</th></tr>
+    <tr><td><code class="inline">process.env.MONGO_URI</code></td><td>קוראים את ה-URI ממשתני סביבה (יוגדר ב-docker-compose)</td></tr>
+    <tr><td><code class="inline">|| 'mongodb://localhost...'</code></td><td>ערך ברירת מחדל אם המשתנה לא מוגדר</td></tr>
+    <tr><td><code class="inline">async function start()</code></td><td>פונקציה שעוטפת את הכל - מתחברת ל-DB <em>לפני</em> שמתחילים להאזין</td></tr>
+    <tr><td><code class="inline">await mongoose.connect(mongoUri)</code></td><td>מחכה שהחיבור ל-DB יצליח</td></tr>
+    <tr><td><code class="inline">try/catch</code></td><td>אם החיבור נכשל - מדפיס שגיאה ויוצא בנימוס</td></tr>
+  </table>
+
+  <div class="why"><strong>למה הסדר חשוב?</strong> אם השרת היה עולה לפני MongoDB, יכול היה להגיע משתמש לפני שה-DB מוכן - שגיאה. הסדר הזה מבטיח: קודם DB, אחר כך השרת.</div>
+</div>
+
+<!-- ============ STEP 13 ============ -->
+<div class="step">
+  <h2><span class="step-num">13</span>docker-compose.yml - שני services ביחד</h2>
+  <p class="summary-line">📌 יצרנו docker-compose.yml שמריץ mongo + server ביחד בפקודה אחת.</p>
+
+  <h3>📄 הקובץ: <code class="inline">survey-app/docker-compose.yml</code></h3>
+  <pre>services:
+  mongo:
+    image: mongo:7
+    volumes:
+      - mongo-data:/data/db
+
+  server:
+    build: ./server
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/surveys
+      - PORT=3000
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:</pre>
+
+  <h3>🔍 פירוק כל בלוק</h3>
+  <table class="files-table">
+    <tr><th>בלוק</th><th>תפקיד</th></tr>
+    <tr><td><code class="inline">services:</code></td><td>רשימת ה-containers שירוצו ביחד</td></tr>
+    <tr><td><code class="inline">image: mongo:7</code></td><td>image מוכן מ-Docker Hub - לא בונים לבד</td></tr>
+    <tr><td><code class="inline">volumes: mongo-data:/data/db</code></td><td>ה-data של mongo נשמר ב-volume - לא נמחק בכבייה</td></tr>
+    <tr><td><code class="inline">build: ./server</code></td><td>בונים image מ-Dockerfile שב-./server</td></tr>
+    <tr><td><code class="inline">ports: "3000:3000"</code></td><td>מיפוי פורט host:container</td></tr>
+    <tr><td><code class="inline">environment: MONGO_URI=...</code></td><td>משתני סביבה ל-container. שים לב <code class="inline">mongo</code> = שם ה-service!</td></tr>
+    <tr><td><code class="inline">depends_on: mongo</code></td><td>סדר הפעלה: mongo קודם, server אחר כך</td></tr>
+  </table>
+
+  <h3>⌨️ פקודות שימושיות</h3>
+  <table class="files-table">
+    <tr><th>פקודה</th><th>מה היא עושה</th></tr>
+    <tr><td><code class="inline">docker compose up</code></td><td>בנייה (אם צריך) והפעלה - תראה לוגים</td></tr>
+    <tr><td><code class="inline">docker compose up -d</code></td><td>הפעלה ברקע - PowerShell חופשי</td></tr>
+    <tr><td><code class="inline">docker compose up --build</code></td><td>אילוץ בנייה מחדש (אחרי שינוי קוד/Dockerfile)</td></tr>
+    <tr><td><code class="inline">docker compose ps</code></td><td>אילו containers רצים</td></tr>
+    <tr><td><code class="inline">docker compose logs -f</code></td><td>לוגים זורמים</td></tr>
+    <tr><td><code class="inline">docker compose down</code></td><td>עצירה ומחיקת containers (volumes נשמרים)</td></tr>
+    <tr><td><code class="inline">docker compose down -v</code></td><td>עצירה + מחיקת volumes (איפוס מלא)</td></tr>
+  </table>
+
+  <div class="why"><strong>הקסם:</strong> docker-compose יוצר רשת פרטית בין כל השירותים. השם של כל service הופך ל-hostname. <strong>"mongo"</strong> ב-MONGO_URI נפתר אוטומטית ל-IP של ה-container של mongo.</div>
+</div>
+
+<!-- ============ STEP 14 ============ -->
+<div class="step">
+  <h2><span class="step-num">14</span>User Model + Endpoints ראשונים</h2>
+  <p class="summary-line">📌 יצרנו את User Model עם Mongoose + 2 endpoints (POST, GET) שעובדים מול MongoDB.</p>
+
+  <h3>📄 קובץ: <code class="inline">server/src/models/User.ts</code></h3>
+  <pre>import mongoose, { Schema } from 'mongoose'
+
+const userSchema = new Schema({
+    email: { type: String, required: true, unique: true, lowercase: true },
+    name: { type: String, required: true },
+    passwordHash: { type: String, required: true, select: false }
+}, {
+    timestamps: true
+})
+
+export const User = mongoose.model('User', userSchema)</pre>
+
+  <h3>🔍 הסבר על Schema</h3>
+  <table class="files-table">
+    <tr><th>שדה</th><th>תפקיד</th></tr>
+    <tr><td><code class="inline">required: true</code></td><td>חובה - אחרת Mongoose דוחה</td></tr>
+    <tr><td><code class="inline">unique: true</code></td><td>ייחודי - אסור 2 משתמשים עם אותו email</td></tr>
+    <tr><td><code class="inline">lowercase: true</code></td><td>המרה אוטומטית לאותיות קטנות</td></tr>
+    <tr><td><code class="inline">select: false</code></td><td>לא חוזר ב-find רגיל - מסיבות אבטחה</td></tr>
+    <tr><td><code class="inline">timestamps: true</code></td><td>Mongoose מוסיף createdAt ו-updatedAt אוטומטית</td></tr>
+  </table>
+
+  <h3>📚 מושגים: Schema vs Model</h3>
+  <ul>
+    <li><strong>Schema</strong> = "התבנית" של דוקומנט (איזה שדות יש, מה הטיפוס)</li>
+    <li><strong>Model</strong> = ה"כלי" שיודע לעבוד מול MongoDB - יוצר, שולף, מעדכן</li>
+  </ul>
+
+  <h3>📄 Endpoints שנוספו ל-index.ts</h3>
+  <pre>app.use(express.json())   // ← חיוני לקריאת JSON ב-body!
+
+app.post('/api/users', async (req, res) =&gt; {
+    const { email, name, passwordHash } = req.body
+    const user = await User.create({ email, name, passwordHash })
+    res.status(201).json(user)
+})
+
+app.get('/api/users', async (req, res) =&gt; {
+    const users = await User.find()
+    res.json(users)
+})</pre>
+
+  <h3>🧪 תוסף VS Code: REST Client</h3>
+  <p>במקום curl - קובץ <code class="inline">.rest</code> עם בקשות HTTP מסודרות:</p>
+  <pre>### Variables
+@host = http://localhost:3000
+
+### Get all users
+GET {{host}}/api/users
+
+### Create new user
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "email": "haim@test.com",
+  "name": "Haim",
+  "passwordHash": "plain123"
+}</pre>
+  <p>מתקינים את התוסף "REST Client" של Huachao Mao, ושולחים בקשות בלחיצה.</p>
+
+  <div class="why"><strong>הקסם:</strong> רוצים reproducibility - הקובץ <code class="inline">.rest</code> נכנס ל-git, וכל מי שמוריד את הריפו יכול לבדוק את ה-API מיד.</div>
+</div>
+
+<!-- ============ STEP 15 ============ -->
+<div class="step">
+  <h2><span class="step-num">15</span>Authentication מלא: bcrypt + JWT + Middleware</h2>
+  <p class="summary-line">📌 הוספנו register, login, requireAuth middleware ו-/me - מערכת אימות מקצועית.</p>
+
+  <h3>⌨️ התקנות</h3>
+  <pre>npm install bcrypt jsonwebtoken
+npm install -D @types/bcrypt @types/jsonwebtoken</pre>
+
+  <h3>📚 הספריות</h3>
+  <table class="files-table">
+    <tr><th>ספרייה</th><th>תפקיד</th></tr>
+    <tr><td><strong>bcrypt</strong></td><td>הופך סיסמה ל-hash מוצפן (אי-הפיך). משווה סיסמאות.</td></tr>
+    <tr><td><strong>jsonwebtoken</strong></td><td>יוצר tokens חתומים שאי אפשר לזייף. תעודות זהות.</td></tr>
+    <tr><td><strong>@types/...</strong></td><td>טיפוסי TypeScript - dev only</td></tr>
+  </table>
+
+  <h3>📄 הזרימה של Register</h3>
+  <pre>app.post('/api/auth/register', async (req, res) =&gt; {
+    const { email, name, password } = req.body
+
+    // 1. ולידציה
+    if (!email || !name || !password) return res.status(400)...
+
+    // 2. בדיקה שאימייל לא קיים
+    const existing = await User.findOne({ email })
+    if (existing) return res.status(409).json({ error: 'Email already in use' })
+
+    // 3. הצפנת הסיסמה
+    const passwordHash = await bcrypt.hash(password, 10)
+
+    // 4. יצירת המשתמש
+    const user = await User.create({ email, name, passwordHash })
+
+    // 5. יצירת token
+    const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '7d' })
+
+    // 6. החזרה (ללא passwordHash!)
+    res.status(201).json({ token, user: { id: user._id, email, name } })
+})</pre>
+
+  <h3>📄 הזרימה של Login</h3>
+  <pre>app.post('/api/auth/login', async (req, res) =&gt; {
+    const { email, password } = req.body
+
+    // 1. שליפת user עם +passwordHash
+    const user = await User.findOne({ email }).select('+passwordHash')
+    if (!user) return res.status(401).json({ error: 'Invalid credentials' })
+
+    // 2. השוואה
+    const isValid = await bcrypt.compare(password, user.passwordHash)
+    if (!isValid) return res.status(401).json({ error: 'Invalid credentials' })
+
+    // 3. token חדש
+    const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '7d' })
+
+    res.json({ token, user: { id: user._id, email, name: user.name } })
+})</pre>
+
+  <h3>📄 ה-Middleware - requireAuth</h3>
+  <pre>function requireAuth(req, res, next) {
+    const header = req.headers.authorization
+    if (!header || !header.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'No token provided' })
+    }
+
+    const token = header.replace('Bearer ', '')
+    try {
+        const decoded = jwt.verify(token, jwtSecret) as { userId: string }
+        req.user = { id: decoded.userId }
+        next()
+    } catch {
+        return res.status(401).json({ error: 'Invalid token' })
+    }
+}
+
+// שימוש:
+app.get('/api/auth/me', requireAuth, async (req, res) =&gt; {
+    const user = await User.findById(req.user.id)
+    res.json(user)
+})</pre>
+
+  <h3>🔍 הקסם של JWT</h3>
+  <p>ה-token מורכב מ-3 חלקים: <strong>Header.Payload.Signature</strong></p>
+  <ul>
+    <li><strong>Header:</strong> איזה אלגוריתם משמש לחתימה</li>
+    <li><strong>Payload:</strong> מידע על המשתמש (userId, expiresAt) - <em>לא מוצפן!</em> רק חתום.</li>
+    <li><strong>Signature:</strong> חתימה של השרת - מי שינסה לזייף ייחשף</li>
+  </ul>
+  <p>אפשר לראות את התוכן ב-<a href="https://jwt.io">jwt.io</a> - הדבק את ה-token ותראה.</p>
+
+  <h3>🧪 בדיקות ב-REST Client</h3>
+  <pre>### Login
+# @name login
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "haim@test.com", "password": "secret123" }
+
+### Get me (uses token automatically!)
+GET {{host}}/api/auth/me
+Authorization: Bearer {{login.response.body.token}}</pre>
+
+  <p>🎁 <strong>הקסם:</strong> <code class="inline">{{login.response.body.token}}</code> - REST Client זוכר את התשובה של "login" ומשתמש אוטומטית בטוקן בבקשות הבאות!</p>
+
+  <div class="why"><strong>אבטחה!</strong>
+    <ul style="margin:6px 0">
+      <li>סיסמאות תמיד עוברות hash לפני שמירה - אסור לשמור plain text</li>
+      <li>passwordHash אף פעם לא חוזר ב-API (בזכות select:false)</li>
+      <li>ה-token תקף ל-7 ימים - אחרי זה צריך להתחבר מחדש</li>
+      <li>בקשות מוגנות צריכות header: <code class="inline">Authorization: Bearer xxx</code></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ STEP 16 ============ -->
+<div class="step">
+  <h2><span class="step-num">16</span>Survey Model + Endpoints</h2>
+  <p class="summary-line">📌 יצרנו Survey Model עם sub-schema ל-questions, slug אוטומטי דרך nanoid, ו-4 endpoints.</p>
+
+  <h3>⌨️ התקנה</h3>
+  <pre>npm install nanoid</pre>
+
+  <h3>📄 קובץ: <code class="inline">server/src/models/Survey.ts</code></h3>
+  <pre>import mongoose, { Schema, Types } from 'mongoose'
+import { nanoid } from 'nanoid'
+
+const questionSchema = new Schema({
+    id: { type: String, default: () =&gt; nanoid(8) },
+    type: { type: String, enum: ['text','textarea','single','multi'], required: true },
+    title: { type: String, required: true },
+    required: { type: Boolean, default: false },
+    options: [String]
+}, { _id: false })
+
+const surveySchema = new Schema({
+    ownerId: { type: Types.ObjectId, ref: 'User', required: true },
+    slug: { type: String, default: () =&gt; nanoid(10), unique: true, index: true },
+    title: { type: String, required: true },
+    description: { type: String, default: '' },
+    questions: [questionSchema],
+    isActive: { type: Boolean, default: true }
+}, { timestamps: true })
+
+export const Survey = mongoose.model('Survey', surveySchema)</pre>
+
+  <h3>🔍 חידושים בשלב הזה</h3>
+  <table class="files-table">
+    <tr><th>תכונה</th><th>הסבר</th></tr>
+    <tr><td><strong>Sub-schema (questionSchema)</strong></td><td>schema בתוך schema - לכל שאלה במערך yes</td></tr>
+    <tr><td><code class="inline">enum: ['text','textarea','single','multi']</code></td><td>רק ערכים אלה מותרים - typed!</td></tr>
+    <tr><td><code class="inline">ref: 'User'</code></td><td>קישור ל-User Model - אפשר לעשות populate</td></tr>
+    <tr><td><code class="inline">slug + nanoid(10)</code></td><td>URL קצר וייחודי לסקרים (במקום ObjectId ארוך)</td></tr>
+    <tr><td><code class="inline">unique + index</code></td><td>חיפוש מהיר + הבטחת ייחודיות</td></tr>
+  </table>
+
+  <h3>🎯 4 ה-endpoints שנוצרו</h3>
+  <table class="files-table">
+    <tr><th>Method</th><th>Path</th><th>מוגן?</th><th>תפקיד</th></tr>
+    <tr><td>POST</td><td>/api/surveys</td><td>✅</td><td>יצירת סקר חדש (ה-slug נוצר אוטומטית)</td></tr>
+    <tr><td>GET</td><td>/api/surveys</td><td>✅</td><td>רשימת הסקרים של המשתמש</td></tr>
+    <tr><td>GET</td><td>/api/surveys/:slug</td><td>❌</td><td>קריאת סקר ציבורי - בלי ownerId!</td></tr>
+    <tr><td>DELETE</td><td>/api/surveys/:id</td><td>✅+בעלות</td><td>מחיקה - רק הבעלים</td></tr>
+  </table>
+
+  <div class="why"><strong>אבטחה:</strong> ב-GET לפי slug - מחזירים רק title, description, questions. <strong>לא ownerId, לא isActive.</strong> מי שמשתף בלינק - אסור שיגלה למי הסקר. וב-DELETE: בדיקת בעלות עם <code class="inline">survey.ownerId.toString() === req.user.id</code>.</div>
+</div>
+
+<!-- ============ STEP 17 ============ -->
+<div class="step">
+  <h2><span class="step-num">17</span>Response Model + Endpoints (תשובות לסקרים)</h2>
+  <p class="summary-line">📌 יצרנו Response Model + 2 endpoints לשליחת תשובות וצפייה בתוצאות.</p>
+
+  <h3>📄 קובץ: <code class="inline">server/src/models/Response.ts</code></h3>
+  <pre>import mongoose, { Schema, Types } from 'mongoose'
+
+const answerSchema = new Schema({
+    questionId: { type: String, required: true },
+    value: { type: Schema.Types.Mixed, required: true }
+}, { _id: false })
+
+const responseSchema = new Schema({
+    surveyId: { type: Types.ObjectId, ref: 'Survey', required: true, index: true },
+    answers: [answerSchema],
+    submittedAt: { type: Date, default: Date.now }
+})
+
+export const SurveyResponse = mongoose.model('Response', responseSchema)</pre>
+
+  <h3>🎯 2 ה-endpoints החדשים</h3>
+  <table class="files-table">
+    <tr><th>Method</th><th>Path</th><th>מוגן?</th><th>תפקיד</th></tr>
+    <tr><td>POST</td><td>/api/surveys/:slug/responses</td><td>❌ (ציבורי!)</td><td>שליחת תשובה ע"י כל אחד</td></tr>
+    <tr><td>GET</td><td>/api/surveys/:id/responses</td><td>✅+בעלות</td><td>תוצאות - רק הבעלים</td></tr>
+  </table>
+
+  <h3>🔍 הקסם</h3>
+  <ul>
+    <li><strong>POST ציבורי</strong> - כל אחד יכול לענות (גם בלי הרשמה!), כי אנחנו רוצים שיהיה קל למשתפים</li>
+    <li><strong>GET מוגן + בעלות</strong> - רק יוצר הסקר רואה תוצאות</li>
+    <li><strong>ולידציה</strong> - בודקים שכל שדה <code class="inline">required</code> מולא</li>
+    <li><strong>DELETE Cascade</strong> - בעת מחיקת סקר, מוחקים גם את כל ה-responses (אין נתוני יתום)</li>
+  </ul>
+
+  <div class="why"><strong>Schema.Types.Mixed:</strong> שדה <code class="inline">value</code> יכול להיות string (לטקסט) או string[] (לבחירה מרובה). <code class="inline">Mixed</code> מאפשר שדה גמיש - וזה הרבה יותר נוח מ-3 שדות נפרדים לכל type.</div>
+</div>
+
+<!-- ============ STEP 18 ============ -->
+<div class="step">
+  <h2><span class="step-num">18</span>Refactor למבנה מקצועי - Routes + Middleware</h2>
+  <p class="summary-line">📌 פיצלנו את ה-index.ts הענק ל-קבצים קטנים מסודרים. נקיון ארכיטקטוני.</p>
+
+  <h3>📁 המבנה החדש</h3>
+  <pre>server/src/
+├── index.ts                  # 15 שורות - נקודת כניסה
+├── app.ts                    # 25 שורות - Express setup
+├── models/
+│   ├── User.ts
+│   ├── Survey.ts
+│   └── Response.ts
+├── middleware/
+│   └── auth.middleware.ts    # requireAuth + AuthRequest interface
+└── routes/
+    ├── auth.routes.ts        # register, login, /me
+    └── surveys.routes.ts     # 6 endpoints של surveys + responses</pre>
+
+  <h3>🔍 השכבות</h3>
+  <table class="files-table">
+    <tr><th>שכבה</th><th>תפקיד</th></tr>
+    <tr><td><strong>index.ts</strong></td><td>חיבור ל-DB ואז הפעלת השרת</td></tr>
+    <tr><td><strong>app.ts</strong></td><td>Express + middlewares + רישום routers</td></tr>
+    <tr><td><strong>models/</strong></td><td>Mongoose Schemas - מדבר עם MongoDB</td></tr>
+    <tr><td><strong>routes/</strong></td><td>הגדרת endpoints - URL + handler</td></tr>
+    <tr><td><strong>middleware/</strong></td><td>פונקציות שרצות לפני ה-handler (auth)</td></tr>
+  </table>
+
+  <h3>📄 הטריק של Express Router</h3>
+  <pre>// routes/auth.routes.ts
+import { Router } from 'express'
+const router = Router()
+
+router.post('/register', ...)   // לא '/api/auth/register'!
+router.post('/login', ...)
+export default router
+
+// app.ts
+app.use('/api/auth', authRouter)   // ← הקסם פה!</pre>
+  <p>ה-prefix מוגדר במקום אחד. אם נרצה לעבור ל-<code class="inline">/api/v2/auth</code> - שינוי בשורה אחת.</p>
+
+  <h3>🎁 שדרוגים נוספים</h3>
+  <ul>
+    <li><strong>AuthRequest interface</strong> - במקום <code class="inline">req: any</code> - טיפוס מדויק עם <code class="inline">req.user</code></li>
+    <li><strong>Optional chaining</strong> - <code class="inline">req.user?.id</code> במקום בדיקת undefined ידנית</li>
+    <li><strong>Imports יחסיים</strong> - <code class="inline">'../middleware/...'</code> מעיד על מבנה היררכי</li>
+  </ul>
+
+  <div class="why"><strong>למה זה חשוב?</strong> בתחילה היה <code class="inline">index.ts</code> בן 220 שורות. אחרי הפצול - הקובץ הגדול הוא 80 שורות (surveys.routes). קל לקרוא, קל לדבג, קל לבדוק יחידה. <strong>זה ההבדל בין חובבן למקצוען.</strong></div>
+</div>
+
+<!-- ============ STEP 19 ============ -->
+<div class="step">
+  <h2><span class="step-num">19</span>nginx Reverse Proxy</h2>
+  <p class="summary-line">📌 הוספנו nginx כשכבת ניתוב. כל הבקשות עוברות דרכו על port 80.</p>
+
+  <h3>🎯 לפני ואחרי</h3>
+  <table class="files-table">
+    <tr><th>לפני</th><th>אחרי</th></tr>
+    <tr><td>Browser → localhost:3000 → Express</td><td>Browser → localhost:80 → nginx → Express</td></tr>
+    <tr><td>Server חשוף ישירות</td><td>Server מבודד - רק nginx פונה אליו</td></tr>
+    <tr><td>פורט לא סטנדרטי</td><td>פורט HTTP סטנדרטי (80)</td></tr>
+  </table>
+
+  <h3>📄 קובץ: <code class="inline">nginx/default.conf</code></h3>
+  <pre>server {
+    listen 80;
+    server_name localhost;
+
+    # Route 1: בקשות API → server (Express)
+    location /api/ {
+        proxy_pass http://server:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # Route 2: לסקרים (slug) - בעתיד יהיה React
+    location /s/ {
+        return 200 'Survey link will work after client is built';
+    }
+
+    # Route 3: שאר - דף ראשי (בעתיד יהיה React)
+    location / {
+        return 200 'Welcome! API at /api/health';
+    }
+}</pre>
+
+  <h3>🔍 הקסם של proxy_pass</h3>
+  <pre>proxy_pass http://server:3000;</pre>
+  <p>ה-<strong>"server"</strong> הוא השם של ה-service ב-docker-compose! Docker DNS פותר אותו ל-IP של ה-container.</p>
+
+  <h3>📄 עדכון ל-docker-compose.yml</h3>
+  <pre>services:
+  mongo:
+    image: mongo:7
+    volumes: [mongo-data:/data/db]
+
+  server:
+    build: ./server
+    # ports: 3000:3000     ← הוסר! לא חשוף החוצה
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/surveys
+      - PORT=3000
+      - JWT_SECRET=super-secret-change-me
+    depends_on: [mongo]
+
+  nginx:
+    image: nginx:alpine
+    ports: ["80:80"]                        # ← רק nginx חשוף!
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on: [server]</pre>
+
+  <h3>🔒 שיפור אבטחה</h3>
+  <p>הסרת <code class="inline">ports</code> של server - <strong>השרת לא חשוף לאינטרנט!</strong> רק nginx. זה אומר:</p>
+  <ul>
+    <li>אם יש פרצת אבטחה ב-Express - תוקף לא יוכל לפנות ישירות</li>
+    <li>nginx יכול לסנן בקשות זדוניות לפני שהגיעו לשרת</li>
+    <li>אפשר לסיים שם SSL/HTTPS בלי לשנות את השרת</li>
+  </ul>
+
+  <h3>🌐 שינוי ב-URL</h3>
+  <table class="files-table">
+    <tr><th>לפני</th><th>אחרי</th></tr>
+    <tr><td><code class="inline">http://localhost:3000/api/health</code></td><td><code class="inline">http://localhost/api/health</code></td></tr>
+  </table>
+
+  <div class="why"><strong>זה הסטנדרט בייצור:</strong> אתרים אמיתיים יושבים מאחורי reverse proxy. nginx, AWS Application Load Balancer, Cloudflare - כל אלה reverse proxies. הם נותנים את השכבה הראשונה של אבטחה ויעילות.</div>
+</div>
+
+<!-- ============ STEP 20 ============ -->
+<div class="step">
+  <h2><span class="step-num">20</span>טסטים לשרת - 5 טסטים עוברים!</h2>
+  <p class="summary-line">📌 הוספנו jest + supertest + mongodb-memory-server. 5 טסטים שמכסים auth, surveys, ו-end-to-end flow.</p>
+
+  <h3>⌨️ התקנות</h3>
+  <pre>npm install -D jest @types/jest ts-jest supertest @types/supertest mongodb-memory-server</pre>
+
+  <h3>📚 הספריות</h3>
+  <table class="files-table">
+    <tr><th>ספרייה</th><th>תפקיד</th></tr>
+    <tr><td><strong>jest</strong></td><td>מסגרת הטסטים. <code class="inline">describe/it/expect</code></td></tr>
+    <tr><td><strong>ts-jest</strong></td><td>מאפשר ל-jest לקרוא TypeScript</td></tr>
+    <tr><td><strong>supertest</strong></td><td>מדמה HTTP לאפליקציית Express - בלי להפעיל שרת אמיתי</td></tr>
+    <tr><td><strong>mongodb-memory-server</strong></td><td>MongoDB בזיכרון - DB טהור לכל ריצה</td></tr>
+  </table>
+
+  <h3>📄 קובץ: <code class="inline">jest.config.js</code></h3>
+  <pre>module.exports = {
+    preset: 'ts-jest',
+    testEnvironment: 'node',
+    testMatch: ['**/tests/**/*.test.ts'],
+    testTimeout: 120000,
+    transformIgnorePatterns: ['node_modules/(?!(nanoid)/)']
+}</pre>
+
+  <h3>🎯 5 הטסטים שכתבנו</h3>
+  <table class="files-table">
+    <tr><th>#</th><th>טסט</th><th>בודק</th></tr>
+    <tr><td>1</td><td>Register success</td><td>201, token, no passwordHash</td></tr>
+    <tr><td>2</td><td>Register duplicate email</td><td>409 Conflict</td></tr>
+    <tr><td>3</td><td>Login wrong password</td><td>401 Unauthorized</td></tr>
+    <tr><td>4</td><td>Surveys without token</td><td>401 (middleware works)</td></tr>
+    <tr><td>5</td><td>Full flow E2E</td><td>register → create → respond → results</td></tr>
+  </table>
+
+  <h3>📄 מבנה <code class="inline">tests/auth.test.ts</code></h3>
+  <pre>import request from 'supertest'
+import mongoose from 'mongoose'
+import { MongoMemoryServer } from 'mongodb-memory-server'
+import app from '../src/app'
+
+let mongo: MongoMemoryServer
+
+beforeAll(async () =&gt; {
+    mongo = await MongoMemoryServer.create()
+    await mongoose.connect(mongo.getUri())
+}, 120000)
+
+afterEach(async () =&gt; {
+    // נקה את כל הקולקציות בין טסטים
+    const collections = mongoose.connection.collections
+    for (const key in collections) {
+        await collections[key].deleteMany({})
+    }
+})
+
+afterAll(async () =&gt; {
+    await mongoose.connection.close()
+    await mongo.stop()
+})
+
+// describe + it blocks ...</pre>
+
+  <h3>🐛 בעיות שפתרנו במהלך הדרך</h3>
+  <ul>
+    <li><strong>nanoid v5 הוא ESM-only</strong> → הורדנו ל-<code class="inline">nanoid@3</code> (CommonJS)</li>
+    <li><strong>setupFilesAfterEach לא קיים ב-Jest</strong> → השמטנו, השתמשנו ב-beforeAll/afterEach בקובץ הטסט</li>
+    <li><strong>Timeout 30s קצר להורדת MongoDB</strong> → הגדלנו ל-120000ms</li>
+    <li><strong>nanoid הקריס את jest</strong> → הוספנו <code class="inline">transformIgnorePatterns</code></li>
+  </ul>
+
+  <h3>🚀 פקודה</h3>
+  <pre>npm test</pre>
+
+  <h3>✅ התוצאה</h3>
+  <pre>PASS tests/auth.test.ts
+  POST /api/auth/register
+    ✓ creates a new user and returns token
+    ✓ rejects duplicate email with 409
+  POST /api/auth/login
+    ✓ rejects wrong password with 401
+  POST /api/surveys (protected)
+    ✓ rejects request without token with 401
+  Full flow: register → create survey → respond → get results
+    ✓ completes the full user journey
+
+Tests: 5 passed, 5 total
+Time:  ~4 seconds (after first run)</pre>
+
+  <div class="why"><strong>למה mongodb-memory-server?</strong>
+    <ul style="margin:6px 0">
+      <li>אין צורך להפעיל MongoDB מקומי</li>
+      <li>כל ריצת טסטים מתחילה מ-DB ריק - בידוד מלא</li>
+      <li>מהיר משמעותית מ-DB אמיתי</li>
+      <li>אידיאלי ל-CI/CD - הטסטים רצים בכל מקום בלי dependencies חיצוניות</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ STEP 21 ============ -->
+<div class="step">
+  <h2><span class="step-num">21</span>חיבור ל-MongoDB Atlas (ענן) + Dual Environment</h2>
+  <p class="summary-line">📌 הוספנו תמיכה ב-MongoDB Atlas בענן. הקוד תומך גם ב-Docker mongo (default) וגם ב-Atlas (override דרך .env).</p>
+
+  <h3>🌍 למה Atlas?</h3>
+  <table class="files-table">
+    <tr><th>Docker mongo</th><th>MongoDB Atlas</th></tr>
+    <tr><td>מקומי במחשב</td><td>בענן - נגיש מכל מקום</td></tr>
+    <tr><td>אין צורך ב-internet</td><td>דורש חיבור</td></tr>
+    <tr><td>נעלם בסוף הסשן</td><td>נשמר תמיד</td></tr>
+    <tr><td>מתאים לפיתוח/בוחן</td><td>מתאים ל-production</td></tr>
+  </table>
+
+  <h3>⚙️ הגדרת Atlas</h3>
+  <ol>
+    <li>נרשמנו ב-<a href="https://cloud.mongodb.com">cloud.mongodb.com</a></li>
+    <li>יצרנו <strong>Cluster</strong> חינמי (M0, AWS Frankfurt)</li>
+    <li><strong>Database Access</strong> - יצרנו user + password</li>
+    <li><strong>Network Access</strong> - הוספנו <code class="inline">0.0.0.0/0</code> (כל IP)</li>
+    <li>קיבלנו <strong>Connection String</strong></li>
+  </ol>
+
+  <h3>🪄 הקסם: Dual Environment ב-docker-compose.yml</h3>
+  <pre>services:
+  mongo:
+    image: mongo:7
+    volumes:
+      - mongo-data:/data/db
+
+  server:
+    build: ./server
+    environment:
+      - MONGO_URI=${MONGO_URI:-mongodb://mongo:27017/surveys}
+      ...
+    depends_on:
+      - mongo
+
+  nginx:
+    ...
+
+volumes:
+  mongo-data:</pre>
+
+  <h3>🔍 הסבר: השורה הקסומה</h3>
+  <pre>- MONGO_URI=${MONGO_URI:-mongodb://mongo:27017/surveys}</pre>
+  <p>תרגום: <strong>"אם יש MONGO_URI ב-.env - השתמש בו. אחרת - default = mongo container."</strong></p>
+  <p>הסימן <code class="inline">:-</code> = ברירת מחדל אם המשתנה ריק.</p>
+
+  <h3>📁 שני קבצי .env</h3>
+  <table class="files-table">
+    <tr><th>קובץ</th><th>תפקיד</th><th>ב-git?</th></tr>
+    <tr><td><code class="inline">.env</code></td><td>הסיסמה והחיבור האמיתיים</td><td>❌ לא! (.gitignore)</td></tr>
+    <tr><td><code class="inline">.env.example</code></td><td>תבנית - מה צריך להגדיר</td><td>✅ כן</td></tr>
+  </table>
+
+  <h4>📄 <code class="inline">.env</code> (אצל המשתמש האישי - עם Atlas):</h4>
+  <pre>MONGO_URI=mongodb+srv://surveyapp:PASSWORD@myfirstapp.hwaf4kt.mongodb.net/surveyapp?appName=MyFirstApp
+JWT_SECRET=haim_secret_2026_survey_app_xyz</pre>
+
+  <h4>📄 <code class="inline">.env.example</code> (לבוחן + git):</h4>
+  <pre># ===== Required =====
+JWT_SECRET=change-me-to-random-string
+
+# ===== Optional - if not set, uses Docker mongo =====
+# MONGO_URI=mongodb+srv://your-cluster.mongodb.net/yourdb</pre>
+
+  <h3>🎯 מי מקבל מה</h3>
+  <table class="files-table">
+    <tr><th>משתמש</th><th>קובץ .env</th><th>תוצאה</th></tr>
+    <tr><td><strong>אתה</strong></td><td>יש MONGO_URI=atlas...</td><td>Atlas ☁️</td></tr>
+    <tr><td><strong>בוחן (clone)</strong></td><td>רק JWT_SECRET</td><td>Docker mongo 🐳</td></tr>
+  </table>
+
+  <h3>⚠️ בעיות שפתרנו</h3>
+  <ul>
+    <li><strong>VPN חוסם Atlas</strong> - היה צריך לנתק VPN חברתי לפני חיבור</li>
+    <li><strong>IP not whitelisted</strong> - הוספנו 0.0.0.0/0 ל-Network Access</li>
+    <li><strong>תווים מיוחדים בסיסמה</strong> - דורש URL-encoding (פתרון: סיסמה אלפא-נומרית בלבד)</li>
+    <li><strong>DNS resolution ב-Docker</strong> - לפעמים Docker לא מצליח לפתור SRV records</li>
+  </ul>
+
+  <div class="why"><strong>למה זה מקצועי במיוחד?</strong>
+  ההפרדה בין dev (Docker mongo) ו-production (Atlas) דרך environment variables היא <strong>הסטנדרט המקצועי</strong>. הקוד נשאר זהה. רק ה-.env משתנה. ככה מציגים גמישות ויכולת deploy אמיתית.</div>
+</div>
+
+<!-- ============ STEP 22 ============ -->
+<div class="step">
+  <h2><span class="step-num">22</span>Refactor מלא - Architecture תעשייתית</h2>
+  <p class="summary-line">📌 פיצול ל-4 שכבות מלאות: Routes → Controllers → Services → Models. הוספת validators, config, errorHandler.</p>
+
+  <h3>📁 המבנה הסופי של server/src/</h3>
+  <pre>server/src/
+├── index.ts                              ← נקודת כניסה (7 שורות!)
+├── app.ts                                ← Express setup
+├── config/
+│   ├── env.ts                            ← משתני סביבה
+│   └── db.ts                             ← חיבור ל-MongoDB
+├── models/
+│   ├── User.ts
+│   ├── Survey.ts
+│   └── Response.ts
+├── middleware/
+│   ├── auth.middleware.ts                ← requireAuth (JWT)
+│   └── errorHandler.middleware.ts        ← global error handler
+├── validators/                           ← ולידציות כ-middleware
+│   ├── auth.validators.ts
+│   └── surveys.validators.ts
+├── services/                             ← לוגיקה עסקית טהורה
+│   ├── auth.service.ts                   ← bcrypt, jwt, register/login
+│   └── surveys.service.ts                ← CRUD logic
+├── controllers/                          ← מקבל req/res
+│   ├── auth.controller.ts
+│   └── surveys.controller.ts
+└── routes/                               ← URL → controller
+    ├── auth.routes.ts
+    └── surveys.routes.ts</pre>
+
+  <h3>🏛 4 השכבות - מי עושה מה</h3>
+  <table class="files-table">
+    <tr><th>שכבה</th><th>תפקיד</th><th>דוגמה</th></tr>
+    <tr><td><strong>Routes</strong></td><td>הגדרת URL + middlewares</td><td><code class="inline">router.post('/register', validate, controller.register)</code></td></tr>
+    <tr><td><strong>Validators</strong></td><td>ולידציה של body/params</td><td><code class="inline">if (!email) return res.status(400)...</code></td></tr>
+    <tr><td><strong>Controllers</strong></td><td>קוראים ל-service ומחזירים תשובה</td><td><code class="inline">const result = await service.register(req.body)</code></td></tr>
+    <tr><td><strong>Services</strong></td><td>לוגיקה טהורה (אין HTTP!)</td><td><code class="inline">await bcrypt.hash(password, 10)</code></td></tr>
+    <tr><td><strong>Models</strong></td><td>Mongoose Schemas - מדבר עם DB</td><td><code class="inline">User.create({...})</code></td></tr>
+  </table>
+
+  <h3>🎯 הזרימה של בקשת register</h3>
+  <pre>POST /api/auth/register
+       ↓
+[1] Route: '/register' → validateRegister → authController.register
+       ↓
+[2] Validator: בודק שיש email/name/password תקינים
+       ↓
+[3] Controller: try { await authService.register(req.body) } catch handlers
+       ↓
+[4] Service: bcrypt.hash → User.create → jwt.sign → return {token, user}
+       ↓
+[5] Model (User): mongoose.create → MongoDB
+       ↓
+תשובה חוזרת: 201 + {token, user}</pre>
+
+  <h3>📄 דוגמה: routes/auth.routes.ts</h3>
+  <pre>import { Router } from 'express'
+import * as authController from '../controllers/auth.controller'
+import { requireAuth } from '../middleware/auth.middleware'
+import { validateRegister, validateLogin } from '../validators/auth.validators'
+
+const router = Router()
+
+router.post('/register', validateRegister, authController.register)
+router.post('/login', validateLogin, authController.login)
+router.get('/me', requireAuth, authController.getMe)
+
+export default router</pre>
+  <p>🎯 <strong>10 שורות בלבד.</strong> ההגיון בקבצים אחרים.</p>
+
+  <h3>📄 דוגמה: services/auth.service.ts (לוגיקה)</h3>
+  <pre>export async function register(input) {
+    const existing = await User.findOne({ email: input.email })
+    if (existing) throw new EmailExistsError()
+
+    const passwordHash = await bcrypt.hash(input.password, 10)
+    const user = await User.create({ ...input, passwordHash })
+    const token = jwt.sign({ userId: user._id }, env.jwtSecret, { expiresIn: '7d' })
+
+    return { token, user: { id: user._id, email: user.email, name: user.name } }
+}</pre>
+  <p>🎯 <strong>הקוד נקי.</strong> אין HTTP, אין req/res - רק לוגיקה טהורה.</p>
+
+  <h3>📄 דוגמה: controllers/auth.controller.ts (מתווך)</h3>
+  <pre>export async function register(req, res) {
+    try {
+        const result = await authService.register(req.body)
+        res.status(201).json(result)
+    } catch (err) {
+        if (err instanceof EmailExistsError) {
+            return res.status(409).json({ error: err.message })
+        }
+        res.status(400).json({ error: err.message })
+    }
+}</pre>
+  <p>🎯 <strong>הcontroller מקבל ומחזיר HTTP. קצר ופשוט.</strong></p>
+
+  <h3>📦 קבצים נוספים שהוספנו</h3>
+  <table class="files-table">
+    <tr><th>קובץ</th><th>תפקיד</th></tr>
+    <tr><td><code class="inline">config/env.ts</code></td><td>מקור אמת אחד למשתני סביבה (mongoUri, jwtSecret, port)</td></tr>
+    <tr><td><code class="inline">config/db.ts</code></td><td>פונקציית connectDB() - מבודדת את לוגיקת החיבור</td></tr>
+    <tr><td><code class="inline">middleware/errorHandler.middleware.ts</code></td><td>תופס שגיאות גלובלי + 404 handler</td></tr>
+    <tr><td><code class="inline">validators/auth.validators.ts</code></td><td>validateRegister, validateLogin (כ-middleware עם next())</td></tr>
+    <tr><td><code class="inline">validators/surveys.validators.ts</code></td><td>validateCreateSurvey, validateSubmitResponse</td></tr>
+  </table>
+
+  <h3>🐛 בעיות שפתרנו</h3>
+  <ul>
+    <li><strong>Express 5 types</strong> - <code class="inline">req.params.slug</code> הוא <code class="inline">string | string[]</code>. הוספנו <code class="inline">as string</code></li>
+    <li><strong>VPN חוסם Atlas</strong> - ניתוק VPN פתר</li>
+    <li><strong>tsconfig - jest types</strong> - יצירת tsconfig.test.json נפרד</li>
+  </ul>
+
+  <div class="why"><strong>למה זה משדרג את הפרויקט?</strong>
+    <ul style="margin:6px 0">
+      <li><strong>Single Responsibility</strong> - כל קובץ עושה דבר אחד</li>
+      <li><strong>Testability</strong> - אפשר לבדוק כל שכבה בנפרד</li>
+      <li><strong>Reusability</strong> - service.register() יכול לקרוא מ-CLI, GraphQL, או REST</li>
+      <li><strong>Maintainability</strong> - שינוי DB → רק models. שינוי URL → רק routes.</li>
+      <li><strong>Team scalability</strong> - מפתחים יכולים לעבוד על שכבות שונות במקביל</li>
+    </ul>
+    <strong>זה הסטנדרט של חברות תוכנה גדולות.</strong>
+  </div>
+</div>
+
+<!-- ============ STEP 23 ============ -->
+<div class="step">
+  <h2><span class="step-num">23</span>Client מלא - React + Vite + TypeScript + MUI</h2>
+  <p class="summary-line">📌 בנינו את ה-frontend המלא: 7 דפים, AuthContext, ProtectedRoute, חיבור ל-API, RTL לעברית.</p>
+
+  <h3>⚙️ Setup</h3>
+  <pre>npm create vite@latest . -- --template react-ts
+npm install
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material stylis-plugin-rtl react-router-dom axios</pre>
+
+  <h3>📁 מבנה client/src/</h3>
+  <pre>src/
+├── main.tsx                     ← MUI Theme + RTL + Router + AuthProvider
+├── App.tsx                      ← Routes
+├── api/
+│   └── client.ts                ← axios + interceptors (token + 401 handler)
+├── context/
+│   └── AuthContext.tsx          ← user state, login/register/logout
+├── components/
+│   ├── Navbar.tsx
+│   ├── ProtectedRoute.tsx
+│   ├── ShareDialog.tsx
+│   └── QuestionEditor.tsx
+├── pages/
+│   ├── Login.tsx
+│   ├── Register.tsx
+│   ├── Dashboard.tsx
+│   ├── CreateSurvey.tsx
+│   ├── AnswerSurvey.tsx         ← ציבורי!
+│   └── Results.tsx
+└── types/
+    └── index.ts                 ← User, Survey, Question, etc.</pre>
+
+  <h3>🎯 7 הדפים</h3>
+  <table class="files-table">
+    <tr><th>נתיב</th><th>דף</th><th>מוגן?</th><th>תפקיד</th></tr>
+    <tr><td><code class="inline">/</code></td><td>Home</td><td>❌</td><td>דף נחיתה - התחבר/הרשם</td></tr>
+    <tr><td><code class="inline">/login</code></td><td>Login</td><td>❌</td><td>התחברות</td></tr>
+    <tr><td><code class="inline">/register</code></td><td>Register</td><td>❌</td><td>הרשמה</td></tr>
+    <tr><td><code class="inline">/dashboard</code></td><td>Dashboard</td><td>✅</td><td>הסקרים שלי</td></tr>
+    <tr><td><code class="inline">/surveys/new</code></td><td>CreateSurvey</td><td>✅</td><td>יצירת סקר עם שאלות דינמיות</td></tr>
+    <tr><td><code class="inline">/s/:slug</code></td><td>AnswerSurvey</td><td>❌ <strong>(ציבורי!)</strong></td><td>מענה על סקר - גם אורחים!</td></tr>
+    <tr><td><code class="inline">/surveys/:id/results</code></td><td>Results</td><td>✅</td><td>תוצאות + גרפים</td></tr>
+  </table>
+
+  <h3>🪄 הקסם של AuthContext + ProtectedRoute</h3>
+  <pre>// ProtectedRoute - עוטף דפים מוגנים
+export default function ProtectedRoute({ children }) {
+    const { user, loading } = useAuth()
+    if (loading) return &lt;CircularProgress /&gt;
+    if (!user) return &lt;Navigate to="/login" /&gt;
+    return &lt;&gt;{children}&lt;/&gt;
+}
+
+// App.tsx - שימוש
+&lt;Route path="/dashboard" element={
+    &lt;ProtectedRoute&gt;&lt;Dashboard /&gt;&lt;/ProtectedRoute&gt;
+} /&gt;</pre>
+
+  <h3>🔧 קסמים נוספים</h3>
+  <ul>
+    <li><strong>axios interceptors</strong> - הוספת JWT אוטומטית לכל בקשה</li>
+    <li><strong>401 handler</strong> - logout אוטומטי כשהtoken פג תוקף</li>
+    <li><strong>RTL</strong> - תמיכה מלאה בעברית עם CacheProvider + rtlPlugin</li>
+    <li><strong>Vite Proxy</strong> - <code class="inline">/api</code> מועבר ל-localhost:80 (nginx → server)</li>
+  </ul>
+
+  <h3>📄 Vite Proxy (vite.config.ts)</h3>
+  <pre>export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:80',
+        changeOrigin: true
+      }
+    }
+  }
+})</pre>
+
+  <h3>🐛 בעיות שפתרנו</h3>
+  <ul>
+    <li><strong>type-only imports</strong> - <code class="inline">import type { User }</code> במקום <code class="inline">import { User }</code> (Vite/esbuild)</li>
+    <li><strong>Routes לא פתוחים</strong> - הוספת <code class="inline">/s/:slug</code> בלי ProtectedRoute לפי דרישת הטופס</li>
+  </ul>
+
+  <h3>✨ פיצ'רים מיוחדים</h3>
+  <ul>
+    <li><strong>QuestionEditor דינמי</strong> - מתאים את עצמו לסוג השאלה (text/textarea/single/multi)</li>
+    <li><strong>ShareDialog</strong> - העתקה אוטומטית של URL ללוח (clipboard API)</li>
+    <li><strong>Results עם גרפים</strong> - bar charts CSS-only לאחוזים</li>
+    <li><strong>Loading states</strong> - CircularProgress בכל מקום</li>
+    <li><strong>Error handling</strong> - Alerts ב-MUI עם הודעות ברורות</li>
+  </ul>
+
+  <div class="why"><strong>למה זה client מקצועי?</strong>
+    <ul style="margin:6px 0">
+      <li>הפרדה ברורה: pages, components, api, context, types</li>
+      <li>כל קומפוננטה Reusable</li>
+      <li>state management עם Context (לא Redux - לא צריך)</li>
+      <li>TypeScript types משותפים</li>
+      <li>responsive עם MUI</li>
+      <li>RTL נכון לעברית</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ STEP 24 ============ -->
+<div class="step">
+  <h2><span class="step-num">24</span>פיצ'ר אורח + Multi-stage Dockerfile</h2>
+  <p class="summary-line">📌 הוספת רשימת סקרים ציבורית (browse) עם חיפוש ומיון, וחיבור ה-Client ל-Docker עם nginx משולב.</p>
+
+  <h3>🌟 פיצ'ר אורח - דף /browse</h3>
+  <p>מאפשר למשתמשים לא-רשומים לראות רשימת סקרים ולענות עליהם.</p>
+  <ul>
+    <li>🔍 <strong>חיפוש</strong> בכותרת ובתיאור (debounced)</li>
+    <li>📊 <strong>מיון</strong> לפי: חדש ביותר / ישן ביותר / כותרת</li>
+    <li>📱 <strong>Responsive grid</strong> עם MUI Cards</li>
+    <li>🎯 כל סקר עם כפתור "ענה על הסקר" → /s/:slug</li>
+  </ul>
+
+  <h3>🔧 Backend: GET /api/surveys/browse</h3>
+  <pre>// services/surveys.service.ts
+export async function browseSurveys(filters: BrowseFilters = {}) {
+    const query: any = { isActive: true }
+
+    if (filters.search) {
+        query.$or = [
+            { title: { $regex: filters.search, $options: 'i' } },
+            { description: { $regex: filters.search, $options: 'i' } }
+        ]
+    }
+
+    let sortQuery: any = { createdAt: -1 }
+    if (filters.sortBy === 'oldest') sortQuery = { createdAt: 1 }
+    if (filters.sortBy === 'title') sortQuery = { title: 1 }
+
+    return Survey.find(query)
+        .select('slug title description questions createdAt')
+        .sort(sortQuery)
+        .limit(100)
+}</pre>
+  <p>🔍 ה-route ב-<code class="inline">router.get('/browse', ...)</code> חייב להיות <strong>לפני</strong> <code class="inline">/:slug</code> כי express מסדר routes לפי הסדר!</p>
+
+  <h3>🐳 Multi-stage Dockerfile של ה-Client</h3>
+  <pre># Stage 1: Build React
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Stage 2: nginx serves the build
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]</pre>
+
+  <h3>🔍 הקסם: Multi-stage</h3>
+  <ul>
+    <li><strong>שלב 1 (builder)</strong>: Node + npm + tsc + vite. בונה את ה-React build (תיקיית dist)</li>
+    <li><strong>שלב 2 (nginx)</strong>: רק nginx + הקבצים הסטטיים + config</li>
+    <li><strong>גודל סופי:</strong> ~25MB (במקום 300MB+ אם היינו משאירים node)</li>
+  </ul>
+
+  <h3>📄 client/nginx.conf - מאחד הכל</h3>
+  <pre>server {
+    listen 80;
+    server_name localhost;
+
+    # /api/* → server (Express)
+    location /api/ {
+        proxy_pass http://server:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # Everything else → React SPA
+    location / {
+        root /usr/share/nginx/html;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+}</pre>
+
+  <h3>🪄 docker-compose.yml סופי - 3 services</h3>
+  <pre>services:
+  mongo:
+    image: mongo:7
+    volumes:
+      - mongo-data:/data/db
+
+  server:
+    build: ./server
+    environment:
+      - MONGO_URI=${MONGO_URI:-mongodb://mongo:27017/surveys}
+      - PORT=3000
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - mongo
+
+  client:
+    build: ./client
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
+volumes:
+  mongo-data:</pre>
+  <p>🎯 <strong>אין יותר service nginx נפרד</strong> - ה-client הוא ה-nginx!</p>
+
+  <h3>🐛 בעיות שפתרנו</h3>
+  <ul>
+    <li><strong>InputProps deprecated</strong> ב-MUI v6 → החלפנו ל-<code class="inline">slotProps={{ input: {...} }}</code></li>
+    <li><strong>verbatimModuleSyntax</strong> → <code class="inline">import type { ReactNode }</code></li>
+    <li><strong>חסרים types</strong> ל-stylis → <code class="inline">npm i -D @types/stylis</code></li>
+    <li><strong>.dockerignore חסר</strong> → context העברה של 54MB. הוספת node_modules ל-ignore = העברה של 1.5MB!</li>
+    <li><strong>Orphan container</strong> (nginx ישן תופס port 80) → <code class="inline">docker stop survey-app-nginx-1 &amp;&amp; docker rm survey-app-nginx-1</code></li>
+  </ul>
+
+  <h3>🌐 איך זה עובד עכשיו</h3>
+  <pre>Browser → http://localhost (port 80)
+       ↓
+       ┌─ nginx (בתוך client container) ─┐
+       │                                  │
+       │  /api/* → server:3000             │
+       │  /     → index.html (React SPA)   │
+       │                                  │
+       └──────────────────────────────────┘</pre>
+
+  <div class="why"><strong>למה זה הסטנדרט המקצועי?</strong>
+    <ul style="margin:6px 0">
+      <li>פקודה אחת: <code class="inline">docker compose up</code> - הכל עולה</li>
+      <li>3 services בלבד - מינימליסטי</li>
+      <li>ה-client אופטימלי בגודל (multi-stage)</li>
+      <li>פיצ'ר אורח מאפשר שימוש בלי הרשמה</li>
+      <li>חיפוש ומיון מקצועיים</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ NEXT STEP ============ -->
+<div class="next-step">
+  <h2>🎯 הצעדים האחרונים לסיום</h2>
+  <p>2 דברים נשארו (לא קוד!):</p>
+  <ul>
+    <li><strong>🅰 README מקיף</strong> (~30 דק') - תיאור, סטאק, הוראות הרצה, צילומי מסך</li>
+    <li><strong>🅱 מסמכי הגשה</strong> (~30-60 דק') - User Stories, Mockup PNG, ERD diagram</li>
+  </ul>
+  <p>📌 <strong>זמן כולל:</strong> 1-1.5 שעות לסיום מלא.</p>
+</div>
+
+<!-- ============ APPENDIX ============ -->
+<div class="step">
+  <h2><span class="step-num">📚</span>נספח: פקודות שימושיות</h2>
+
+  <h3>🔧 פקודות PowerShell</h3>
+  <table class="files-table">
+    <tr><th>פקודה</th><th>מה היא עושה</th></tr>
+    <tr><td><code class="inline">pwd</code></td><td>הצגת התיקייה הנוכחית</td></tr>
+    <tr><td><code class="inline">cd &lt;path&gt;</code></td><td>החלפת תיקייה</td></tr>
+    <tr><td><code class="inline">cd ..</code></td><td>תיקייה אחת אחורה</td></tr>
+    <tr><td><code class="inline">dir</code></td><td>רשימת הקבצים בתיקייה הנוכחית</td></tr>
+    <tr><td><code class="inline">mkdir &lt;name&gt;</code></td><td>יצירת תיקייה</td></tr>
+    <tr><td><code class="inline">Remove-Item &lt;file&gt;</code></td><td>מחיקת קובץ</td></tr>
+    <tr><td><code class="inline">Remove-Item -Recurse &lt;dir&gt;</code></td><td>מחיקת תיקייה ותכולתה</td></tr>
+    <tr><td><code class="inline">Rename-Item &lt;old&gt; &lt;new&gt;</code></td><td>שינוי שם</td></tr>
+    <tr><td><code class="inline">code &lt;file&gt;</code></td><td>פתיחת קובץ ב-VS Code</td></tr>
+    <tr><td><code class="inline">code .</code></td><td>פתיחת התיקייה הנוכחית ב-VS Code</td></tr>
+    <tr><td><strong>Ctrl+C</strong></td><td>עצירת תהליך רץ</td></tr>
+    <tr><td><strong>Tab</strong></td><td>השלמה אוטומטית של שמות</td></tr>
+  </table>
+
+  <h3>🔧 פקודות npm</h3>
+  <table class="files-table">
+    <tr><th>פקודה</th><th>מה היא עושה</th></tr>
+    <tr><td><code class="inline">npm init -y</code></td><td>יצירת package.json עם ברירות מחדל</td></tr>
+    <tr><td><code class="inline">npm i &lt;pkg&gt;</code></td><td>התקנת ספרייה (ל-dependencies)</td></tr>
+    <tr><td><code class="inline">npm i -D &lt;pkg&gt;</code></td><td>התקנת ספרייה ל-devDependencies (פיתוח בלבד)</td></tr>
+    <tr><td><code class="inline">npm install</code></td><td>התקנת כל הספריות מתוך package.json</td></tr>
+    <tr><td><code class="inline">npm uninstall &lt;pkg&gt;</code></td><td>הסרת ספרייה</td></tr>
+    <tr><td><code class="inline">npm run &lt;script&gt;</code></td><td>הרצת script מ-scripts</td></tr>
+    <tr><td><code class="inline">npm start</code></td><td>קיצור ל-<code class="inline">npm run start</code></td></tr>
+  </table>
+
+  <h3>🔧 פקודות Docker</h3>
+  <table class="files-table">
+    <tr><th>פקודה</th><th>מה היא עושה</th></tr>
+    <tr><td><code class="inline">docker --version</code></td><td>גרסת Docker</td></tr>
+    <tr><td><code class="inline">docker run hello-world</code></td><td>בדיקת פעולה תקינה של Docker</td></tr>
+    <tr><td><code class="inline">docker images</code></td><td>הצגת ה-images שיש לך</td></tr>
+    <tr><td><code class="inline">docker ps</code></td><td>הצגת containers שרצים עכשיו</td></tr>
+    <tr><td><code class="inline">docker ps -a</code></td><td>הצגת כל ה-containers (גם שעצרו)</td></tr>
+    <tr><td><code class="inline">docker build -t &lt;name&gt; .</code></td><td>בניית image מה-Dockerfile</td></tr>
+    <tr><td><code class="inline">docker run -p &lt;host&gt;:&lt;cont&gt; &lt;img&gt;</code></td><td>הרצת container עם מיפוי פורט</td></tr>
+    <tr><td><code class="inline">docker stop &lt;id/name&gt;</code></td><td>עצירת container</td></tr>
+    <tr><td><code class="inline">docker rm &lt;id/name&gt;</code></td><td>מחיקת container עצור</td></tr>
+    <tr><td><code class="inline">docker rmi &lt;img&gt;</code></td><td>מחיקת image</td></tr>
+    <tr><td><code class="inline">docker logs &lt;id/name&gt;</code></td><td>הצגת לוגים של container</td></tr>
+  </table>
+
+  <h3>📚 מושגים מרכזיים שלמדנו</h3>
+  <table class="files-table">
+    <tr><th>מושג</th><th>הסבר במשפט</th></tr>
+    <tr><td><strong>package.json</strong></td><td>תעודת הזהות של פרויקט Node</td></tr>
+    <tr><td><strong>dependencies</strong></td><td>ספריות שהפרויקט צריך גם ב-production</td></tr>
+    <tr><td><strong>devDependencies</strong></td><td>ספריות שצריך רק לפיתוח</td></tr>
+    <tr><td><strong>node_modules</strong></td><td>התיקייה עם הקוד של כל הספריות (לא ב-git!)</td></tr>
+    <tr><td><strong>package-lock.json</strong></td><td>צילום של גרסאות מדויקות שהותקנו</td></tr>
+    <tr><td><strong>SemVer (^x.y.z)</strong></td><td>מערכת ניהול גרסאות: ראשית.משנית.תיקון</td></tr>
+    <tr><td><strong>tsconfig.json</strong></td><td>הגדרות הקומפיילר של TypeScript</td></tr>
+    <tr><td><strong>scripts</strong></td><td>קיצורי דרך לפקודות בתוך npm</td></tr>
+    <tr><td><strong>Image</strong></td><td>"מתכון קפוא" של אפליקציה ארוזה</td></tr>
+    <tr><td><strong>Container</strong></td><td>image שמופעל ורץ</td></tr>
+    <tr><td><strong>Dockerfile</strong></td><td>הוראות בנייה ל-image</td></tr>
+    <tr><td><strong>.dockerignore</strong></td><td>קבצים ש-Docker יתעלם מהם</td></tr>
+    <tr><td><strong>port mapping</strong></td><td>קישור פורט במחשב לפורט ב-container</td></tr>
+  </table>
+</div>
+
+</div>
+</body>
+</html>

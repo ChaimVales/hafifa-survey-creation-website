@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Builder - Mockups</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Heebo', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2962ff;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #2962ff;
+            margin: 40px 0 20px;
+            padding: 10px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .mockup {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .navbar {
+            background: #2962ff;
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar .logo {
+            font-weight: bold;
+            font-size: 18px;
+            flex-grow: 1;
+        }
+
+        .navbar .btn {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .content {
+            padding: 40px;
+            min-height: 400px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        h3.hero {
+            font-size: 42px;
+            color: #2962ff;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #2962ff;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 4px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #2962ff;
+            padding: 12px 28px;
+            border-radius: 4px;
+            border: 2px solid #2962ff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-text {
+            color: #2962ff;
+            padding: 12px 28px;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .form h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .form-link {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-link a {
+            color: #2962ff;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            background: white;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .card-meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e0e0e0;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 150px;
+        }
+
+        .question-card {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .q-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .q-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .results-bar {
+            background: #e0e0e0;
+            height: 12px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .results-fill {
+            background: #2962ff;
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .answer-line {
+            padding: 8px 12px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            margin: 8px 0;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .alert-success h3 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .question-public {
+            margin: 25px 0;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .q-label {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+        }
+
+        .radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #888;
+            border-radius: 50%;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #888;
+            border-radius: 4px;
+        }
+
+        .add-btn {
+            background: white;
+            color: #2962ff;
+            padding: 10px 20px;
+            border: 1px dashed #2962ff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background: #2962ff;
+            color: white;
+            padding: 14px 0;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .label-required {
+            color: red;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            background: #e3f2fd;
+            color: #2962ff;
+            margin-right: 8px;
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2962ff;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        @media print {
+            .print-btn {
+                display: none;
+            }
+
+            h2 {
+                page-break-before: always;
+            }
+
+            h2:first-of-type {
+                page-break-before: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">🖨️ הדפס / שמור כ-PDF</button>
+
+    <h1>📋 Survey Builder - Mockups</h1>
+    <p style="text-align:center; color:#666; margin-bottom:40px;">8 הדפים של המערכת. כל אחד נראה ככה באתר האמיתי.</p>
+
+    <!-- 1. Home Page -->
+    <h2>1. דף הבית / Home Page (/)</h2>
+    <div class="mockup">
+        <div class="navbar">
+            <div class="logo">📋 Survey Builder</div>
+            <div class="btn">התחבר</div>
+            <div class="btn">הרשם</div>
+        </div>
+        <div class="content center" style="padding:80px 40px;">
+            <h3 class="hero">🎯 Survey Builder</h3>
+            <p class="subtitle">צור סקרים, שתף, וקבל תשובות</p>
+            <div class="btn-group">
+                <button class="btn-primary">התחבר</button>
+                <button class="btn-outline">הרשם</button>
+                <button class="btn-text">🔍 היכנס כאורח</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Login -->
+    <h2>2. התחברות / Login (/login)</h2>
+    <div class="mockup">
+        <div class="navbar">
+            <div class="logo">📋 Survey Builder</div>
+            <div class="btn">התחבר</div>
+            <div class="btn">הרשם</div>
+        </div>
+        <div class="content">
+            <div class="form">
+                <h3>התחברות</h3>
+                <label class="label">Email:</label>
+                <input class="input" placeholder="haim@example.com">
+                <label class="label">סיסמה:</label>
+                <input class="input" type="password" placeholder="••••••">
+                <button class="btn-primary" style="width:100%; padding:14px;">התחבר</button>
+                <p class="form-link">אין לך חשבון? <a href="#">הירשם</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Register -->
+    <h2>3. הרשמה / Register (/register)</h2>
+    <div class="mockup">
+        <div class="navbar">
+            <div class="logo">📋 Survey Builder</div>
+            <div class="btn">התחבר</div>
+            <div class="btn">הרשם</div>
+        </div>
+        <div class="content">
+            <div class="form">
+                <h3>הרשמה</h3>
+                <label class="label">שם מלא:</label>
+                <input class="input" placeholder="חיים ולס">
+                <label class="label">Email:</label>
+                <input class="input" placeholder="haim@example.com">
+                <label class="label">סיסמה (לפחות 6 תווים):</label>
+                <input class="input" type="password" placeholder="••••••">
+                <button class="btn-primary" style="width:100%; padding:14px;">הירשם</button>
+                <p class="form-link">יש לך חשבון? <a href="#">התחבר</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Browse Surveys -->
+    <h2>4. דפדוף בסקרים / Browse (/browse) - ציבורי</h2>
+    <div class="mockup">
+        <div class="navbar">
+            <div class="logo">📋 Survey Builder</div>
+            <div class="btn">התחבר</div>
+            <div class="btn">הרשם</div>
+        </div>
+        <div class="content">
+            <h3 style="margin-bottom:10px;">🔍 גלה סקרים</h3>
+            <p class="subtitle">ענה על סקרים מעניינים בלי להירשם</p>
+            <div class="search-bar">
+                <input class="search-input" placeholder="🔍 חפש לפי כותרת או תיאור...">
+                <select class="select">
+                    <option>חדש ביותר</option>
+                    <option>ישן ביותר</option>
+                    <option>לפי כותרת</option>
+                </select>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-title">שביעות רצון מהאירוע</div>
+                    <p style="color:#666; font-size:14px; margin-bottom:10px;">נשמח לדעת מה דעתך</p>
+                    <div class="card-meta">3 שאלות</div>
+                    <button class="btn-primary" style="width:100%;">ענה על הסקר</button>
+                </div>
+                <div class="card">
+                    <div class="card-title">משוב על המוצר</div>
+                    <p style="color:#666; font-size:14px; margin-bottom:10px;">עזור לנו להשתפר</p>
+                    <div class="card-meta">5 שאלות</div>
+                    <button class="btn-primary" style="width:100%;">ענה על הסקר</button>
+                </div>
+                <div class="card">
+                    <div class="card-title">סקר עובדים 2026</div>
+                    <p style="color:#666; font-size:14px; margin-bottom:10px;">משוב שנתי</p>
+                    <div class="card-meta">8 שאלות</div>
+                    <button class="btn-primary" style="width:100%;">ענה על הסקר</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Dashboard -->
+    <h2>5. דשבורד / Dashboard (/dashboard) - מוגן</h2>
+    <div class="mockup">
+        <div class="navbar">
+            <div class="logo">📋 Survey Builder</div>
+            <span>שלום חיים</span>
+            <div class="btn">הסקרים שלי</div>
+            <div class="btn">התנתק</div>
+        </div>
+        <div class="content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+                <h3 style="margin:0;">הסקרים שלי</h3>
+                <button class="btn-primary">+ סקר חדש</button>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-title">שביעות רצון</div>
+                    <div class="card-meta">3 שאלות</div>
+                    <div class="card-actions">
+                        <div class="icon-btn">🔗</div>
+                        <div class="icon-btn">📊</div>
+                        <div class="icon-btn">🗑</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">משוב על אירוע</div>
+                    <div class="card-meta">5 שאלות</div>
+                    <div class="card-actions">
+                        <div class="icon-btn">🔗</div>
+                        <div class="icon-btn">📊</div>
+                        <div class="icon-btn">🗑</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Create Survey -->
+    <h2>6. יצירת סקר / Create Survey (/surveys/new) - מוגן</h2>
+    <div class="mockup">
+        <div class="navbar">
+            <div class="logo">📋 Survey Builder</div>
+            <span>שלום חיים</span>
+            <div class="btn">הסקרים שלי</div>
+            <div class="btn">התנתק</div>
+        </div>
+        <div class="content">
+            <h3 style="margin-bottom:25px;">סקר חדש</h3>
+            <div style="background:#fafafa; padding:25px; border-radius:8px; margin-bottom:25px;">
+                <label class="label">כותרת הסקר:</label>
+                <input class="input" placeholder="שביעות רצון מהאירוע">
+                <label class="label">תיאור (אופציונלי):</label>
+                <input class="input" placeholder="נשמח לדעת מה דעתך">
+            </div>
+            <div class="question-card">
+                <div class="q-header">
+                    <span class="q-title">שאלה 1</span>
+                    <div class="icon-btn" style="border-color:#d32f2f;">🗑</div>
+                </div>
+                <input class="input" placeholder="מה שמך?">
+                <div class="q-row">
+                    <select class="select">
+                        <option>טקסט קצר</option>
+                    </select>
+                    <label><input type="checkbox" checked> חובה</label>
+                </div>
+            </div>
+            <div class="question-card">
+                <div class="q-header">
+                    <span class="q-title">שאלה 2</span>
+                    <div class="icon-btn" style="border-color:#d32f2f;">🗑</div>
+                </div>
+                <input class="input" placeholder="איך הייתה החוויה?">
+                <div class="q-row">
+                    <select class="select">
+                        <option>בחירה בודדת</option>
+                    </select>
+                    <label><input type="checkbox" checked> חובה</label>
+                </div>
+                <div style="margin-top:15px;">
+                    <p style="font-size:14px; color:#666; margin-bottom:10px;">אופציות:</p>
+                    <input class="input" placeholder="מעולה" style="margin-bottom:8px;">
+                    <input class="input" placeholder="בסדר" style="margin-bottom:8px;">
+                    <input class="input" placeholder="לא נהנית">
+                    <button class="add-btn" style="margin-top:10px;">+ הוסף אופציה</button>
+                </div>
+            </div>
+            <button class="add-btn">+ הוסף שאלה</button>
+            <div style="margin-top:30px; display:flex; gap:15px;">
+                <button class="btn-primary" style="padding:14px 40px;">פרסם סקר</button>
+                <button class="btn-text">ביטול</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. Answer Survey -->
+    <h2>7. מענה על סקר / Answer Survey (/s/abc123) - ציבורי</h2>
+    <div class="mockup">
+        <div class="navbar">
+            <div class="logo">📋 Survey Builder</div>
+            <div class="btn">התחבר</div>
+            <div class="btn">הרשם</div>
+        </div>
+        <div class="content">
+            <h3>שביעות רצון מהאירוע</h3>
+            <p class="description">נשמח לדעת מה דעתך על האירוע. תודה!</p>
+
+            <div class="question-public">
+                <div class="q-label">1. מה שמך? <span class="label-required">*</span></div>
+                <input class="input" placeholder="הקלד כאן...">
+            </div>
+
+            <div class="question-public">
+                <div class="q-label">2. איך הייתה החוויה? <span class="label-required">*</span></div>
+                <div class="radio-option">
+                    <div class="radio"></div> מעולה
+                </div>
+                <div class="radio-option">
+                    <div class="radio"></div> בסדר
+                </div>
+                <div class="radio-option">
+                    <div class="radio"></div> לא נהנית
+                </div>
+            </div>
+
+            <div class="question-public">
+                <div class="q-label">3. הערות נוספות:</div>
+                <textarea class="input" rows="3" placeholder="יש לך משהו להוסיף?"></textarea>
+            </div>
+
+            <button class="submit-btn">שלח תשובות</button>
+        </div>
+    </div>
+
+    <!-- 8. Results -->
+    <h2>8. תוצאות / Results (/surveys/:id/results) - מוגן</h2>
+    <div class="mockup">
+        <div class="navbar">
+            <div class="logo">📋 Survey Builder</div>
+            <span>שלום חיים</span>
+            <div class="btn">הסקרים שלי</div>
+            <div class="btn">התנתק</div>
+        </div>
+        <div class="content">
+            <h3>שביעות רצון מהאירוע</h3>
+            <p class="card-meta" style="font-size:18px; margin-bottom:30px;">12 תשובות</p>
+
+            <div class="card">
+                <div class="card-title">1. מה שמך?</div>
+                <div class="answer-line">• דנה</div>
+                <div class="answer-line">• יוסי</div>
+                <div class="answer-line">• רונן</div>
+                <div class="answer-line">• אביגיל</div>
+                <div class="answer-line">• ועוד 8...</div>
+            </div>
+
+            <div class="card" style="margin-top:15px;">
+                <div class="card-title">2. איך הייתה החוויה?</div>
+                <div style="margin-top:15px;">
+                    <p>מעולה: <strong>8</strong> (67%)</p>
+                    <div class="results-bar">
+                        <div class="results-fill" style="width:67%;"></div>
+                    </div>
+                </div>
+                <div style="margin-top:15px;">
+                    <p>בסדר: <strong>3</strong> (25%)</p>
+                    <div class="results-bar">
+                        <div class="results-fill" style="width:25%;"></div>
+                    </div>
+                </div>
+                <div style="margin-top:15px;">
+                    <p>לא נהנית: <strong>1</strong> (8%)</p>
+                    <div class="results-bar">
+                        <div class="results-fill" style="width:8%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. Thank you -->
+    <h2>9. תודה - אחרי שליחת תשובה</h2>
+    <div class="mockup">
+        <div class="navbar">
+            <div class="logo">📋 Survey Builder</div>
+            <div class="btn">התחבר</div>
+            <div class="btn">הרשם</div>
+        </div>
+        <div class="content" style="padding:80px 40px;">
+            <div class="alert-success" style="max-width:400px; margin:0 auto;">
+                <h3>🎉 תודה!</h3>
+                <p>תשובתך נקלטה בהצלחה.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+### Variables
+@host = http://localhost
+
+### ============= HEALTH =============
+
+### Health check
+GET {{host}}/api/health
+
+### ============= AUTH =============
+
+### Register a new user
+POST {{host}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "haima@test.com",
+  "name": "Haim Vales",
+  "password": "secret123"
+}
+
+### Login
+# @name login
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "haima@test.com",
+  "password": "secret123"
+}
+
+### Get me (requires token)
+GET {{host}}/api/auth/me
+Authorization: Bearer {{login.response.body.token}}
+
+### Login with wrong password (should fail with 401)
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "haim@test.com",
+  "password": "WRONG_PASSWORD"
+}
+
+### ============= SURVEYS =============
+
+### Create a new survey (protected)
+# @name createSurvey
+POST {{host}}/api/surveys
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.token}}
+
+{
+  "title": "סקר שביעות רצון",
+  "description": "נשמח לדעת מה דעתך",
+  "questions": [
+    {
+      "type": "text",
+      "title": "שמך?",
+      "required": true
+    },
+    {
+      "type": "single",
+      "title": "איך הייתה החוויה?",
+      "required": true,
+      "options": ["מעולה", "בסדר", "לא נהנית"]
+    },
+    {
+      "type": "textarea",
+      "title": "הערות נוספות",
+      "required": false
+    }
+  ]
+}
+
+### Get my surveys (protected)
+GET {{host}}/api/surveys
+Authorization: Bearer {{login.response.body.token}}
+
+### Get survey by slug (PUBLIC! no auth needed)
+GET {{host}}/api/surveys/{{createSurvey.response.body.slug}}
+
+### ============= RESPONSES =============
+
+### Submit a response (PUBLIC! no token needed)
+# @name submitResponse
+POST {{host}}/api/surveys/{{createSurvey.response.body.slug}}/responses
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "questionId": "{{createSurvey.response.body.questions[0].id}}",
+      "value": "חיים"
+    },
+    {
+      "questionId": "{{createSurvey.response.body.questions[1].id}}",
+      "value": "מעולה"
+    },
+    {
+      "questionId": "{{createSurvey.response.body.questions[2].id}}",
+      "value": "תודה רבה על החוויה!"
+    }
+  ]
+}
+
+### Get survey results (protected, owner only)
+GET {{host}}/api/surveys/{{createSurvey.response.body._id}}/responses
+Authorization: Bearer {{login.response.body.token}}
+
+### Try to get results WITHOUT auth (should fail with 401)
+GET {{host}}/api/surveys/{{createSurvey.response.body._id}}/responses
+
+### ============= DELETE =============
+
+### Delete survey (protected + owner only) - בסוף!
+DELETE {{host}}/api/surveys/{{createSurvey.response.body._id}}
+Authorization: Bearer {{login.response.body.token}}
+
+
+
+### Test validation - empty body (should fail 400)
+POST {{host}}/api/auth/register
+Content-Type: application/json
+
+{}
+
+### Test validation - invalid email (should fail 400)
+POST {{host}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "not-an-email",
+  "name": "Test",
+  "password": "secret123"
+}
+
+### Test validation - short password (should fail 400)
+POST {{host}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "name": "Test",
+  "password": "abc"
+}
+
+### Test validation - empty questions (should fail 400)
+POST {{host}}/api/surveys
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.token}}
+
+{
+  "title": "Empty Survey",
+  "questions": []
+}
